@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('resources', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+        $table->string('name');
+        $table->enum('type', ['Book', 'E-book', 'Laptop']);
+        $table->integer('quantity');
+        $table->foreignId('supplier_id')->constrained('suppliers');
+        $table->timestamps();
         });
     }
 

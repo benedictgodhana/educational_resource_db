@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('donors', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+        $table->string('name');
+        $table->string('contact_email');
+        $table->timestamps();
         });
     }
 

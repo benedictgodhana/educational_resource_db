@@ -1,66 +1,179 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Educational Resource Distribution Database
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## About the Project
 
-## About Laravel
+The **Educational Resource Distribution Database** aims to streamline the management and distribution of educational materials such as books, e-books, laptops, and other learning resources to schools, libraries, and students in Kenya. The project will ensure equitable distribution and efficient tracking of educational resources.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This application is built using **Laravel** and uses **Spatie** for role-based access control.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Efficient Resource Management** – Track and manage educational resources.
+- **Transparent Distribution** – Monitor the movement of resources from suppliers to beneficiaries.
+- **User Role Management** – Admin, Supplier, Donor, and Beneficiary roles with distinct permissions.
+- **Query Optimization** – Performance improvements using indexing and optimized queries.
 
-## Learning Laravel
+## Prerequisites
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Make sure you have the following installed:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- PHP >= 8.0
+- Composer
+- MySQL or any other relational database
+- Laravel 8.x or above
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Installation
 
-## Laravel Sponsors
+Follow these steps to get the project running on your local machine:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1. **Clone the repository:**
 
-### Premium Partners
+   ```bash
+   git clone https://github.com/yourusername/educational-resource-db.git
+   cd educational-resource-db
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+    Install dependencies:
 
-## Contributing
+    Use Composer to install the necessary dependencies:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+composer install
 
-## Code of Conduct
+Configure environment variables:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Copy the .env.example file to .env:
 
-## Security Vulnerabilities
+cp .env.example .env
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Update the .env file with your database credentials:
 
-## License
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=educational_resource_db
+DB_USERNAME=root
+DB_PASSWORD=
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Generate the application key:
+
+php artisan key:generate
+
+Run database migrations:
+
+The application requires certain database tables. Run the following command to apply migrations:
+
+php artisan migrate
+
+Seed the database:
+
+The application includes seeders to populate initial data for testing. Run the following command to seed the database with roles, permissions, and users:
+
+    php artisan db:seed
+
+    This will create the initial roles (Admin, Supplier, Donor, Beneficiary) and assign them to users.
+
+Database Structure
+
+This project uses a relational database with the following tables:
+
+    Users: Stores information about users and their roles (Admin, Supplier, Donor, Beneficiary).
+
+    Resources: Stores information about educational resources.
+
+    Suppliers: Tracks suppliers providing resources.
+
+    Donors: Tracks donors contributing resources.
+
+    Beneficiaries: Stores information about institutions (e.g., schools, libraries) receiving resources.
+
+    Distributions: Tracks the distribution of resources from suppliers/donors to beneficiaries.
+
+Relationships:
+
+    One supplier can provide many resources.
+
+    Many donors can donate many resources.
+
+    Many resources can be distributed to many beneficiaries.
+
+Accessing the Database
+
+You can access and manage the database through your MySQL client (e.g., phpMyAdmin or MySQL Workbench) using the following credentials from the .env file:
+
+    Database Name: educational_resource_db
+
+    Username: Your MySQL username (default is root)
+
+    Password: Your MySQL password (leave empty if none)
+
+To run queries:
+
+    Open your MySQL client.
+
+    Connect to the educational_resource_db database.
+
+    You can now run any SQL queries to interact with the tables.
+
+Available Routes
+
+The project provides different routes for users based on their roles. Here's how you can use the application based on roles:
+
+    Admin:
+
+        Manage users, resources, suppliers, donors, and beneficiaries.
+
+        View reports and distribution logs.
+
+    Supplier:
+
+        View resources they have provided.
+
+        Manage available resources for distribution.
+
+    Donor:
+
+        View and manage donations.
+
+    Beneficiary:
+
+        Track and receive resources.
+
+Testing
+
+To run tests for your application, use:
+
+php artisan test
+
+Customization
+
+You can customize roles and permissions by editing the Role and Permission seeder files. You can also modify the routes and controllers to fit your specific use case.
+Update Roles and Permissions
+
+To update the roles and permissions, modify the RoleSeeder and PermissionSeeder files and run the following:
+
+php artisan db:seed --class=RoleSeeder
+
+License
+
+This project is open-sourced software licensed under the MIT license.
+Acknowledgements
+
+    Spatie Laravel Permission: Used for managing roles and permissions.
+
+    Laravel: The framework used to build this application.
+
+    MySQL: The relational database management system.
+
+Contact
+
+For any inquiries, please reach out to:
+
+    Email: your-email@example.com
+
+
+### Key Points to Note:
+1. **Database Setup**: Make sure the `.env` file is properly configured with the database credentials, and the database is created beforehand.
+2. **Roles and Permissions**: The roles and permissions are seeded via the `RoleSeeder` and `PermissionSeeder`, and these roles are assigned to users in the `DatabaseSeeder`.
+3. **Accessing the DB**: The database can be accessed using any MySQL client like phpMyAdmin or MySQL Workbench using the credentials set in `.env`.
+
+This should help your team get started with using and interacting with the Educational Resource Distribution Database!
+

@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('distributions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('resource_id')->constrained('resources');
+            $table->foreignId('beneficiary_id')->constrained('beneficiaries');
+            $table->integer('quantity');
+            $table->date('date_distributed');
             $table->timestamps();
         });
     }

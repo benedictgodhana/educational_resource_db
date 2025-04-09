@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('beneficiaries', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->enum('type', ['School', 'Library', 'Student']);
+            $table->string('location');
             $table->timestamps();
         });
     }
